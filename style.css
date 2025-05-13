@@ -62,10 +62,9 @@ body {
     
 }
 
-/* .container {
-    width: 100%;
-    margin: 0 auto;
-} */
+.container {
+    border: 1px solid black;
+}
 
 nav {
     display: flex;
@@ -169,8 +168,8 @@ nav {
     /* display: flex; */
 }
 section{
-    margin-bottom: 4rem !important;
-    padding: 0 3rem !important;
+    margin-bottom: 4rem ;
+    padding: 0 3rem ;
 }
 
 .hero{
@@ -806,6 +805,9 @@ footer ul{
         color: rgb(34, 33, 35);
         font-weight: 600;
     }
+    .contact .container{
+        padding: 3rem;
+    }
    
     
 }
@@ -897,7 +899,7 @@ footer ul{
         margin: 1rem;
         padding: 1rem 1rem;
         line-height: 1.4;
-        width: 80%;
+        width: 100%;
     }
     .contact-info {
         width: 55%;
@@ -914,6 +916,20 @@ footer ul{
     
 }
 @media screen and (max-width: 650px){
+    .container {
+        padding: 1rem .5rem;
+        /* display: flex; */
+    }
+    section{
+        margin-bottom: 2rem ;
+        padding: 0 1rem ;
+    }
+ 
+    .about-content p, .about-content{
+        border: 1px black solid;
+        width: 100%;
+    }
+
     .doings .container{
         
         flex-direction: column;
@@ -925,7 +941,7 @@ footer ul{
         width: 90%;
     }
     
-    .why-me{
+    .why-us{
         width: 100%;
     }
     .fee .inner{
@@ -994,6 +1010,17 @@ footer ul{
     .two-and-four{
         position: relative;
         top: 0;
+    }
+
+    .contact-form{
+        width: 100%;
+    }
+    .contact-info {
+        width: 100%;
+    }
+    .contact .container{
+        padding: 2rem;
+        border-radius: 20px;
     }
 
     
