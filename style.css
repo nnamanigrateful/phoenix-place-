@@ -29,7 +29,7 @@
     --font-size-header: clamp(1.3rem, 5vw, 3rem);
     --font-size-secondary-header: clamp(1rem, 3vw, 2.6rem);
     --font-size-subheader: 2rem;
-    --font-size-nav: clamp (.8rem, 2vw, 1.5rem);
+    --font-size-nav: clamp(.8rem, 2vw, 1.5rem);
     --font-size-paragraph: clamp(.8rem, 2vw, 1.5rem);
     --font-size-body-paragraph: clamp(.8rem, 1.2vw, 1.5rem);
     --font-size-small: 0.8rem;
@@ -213,7 +213,6 @@ section{
 
 
 .about{
-    /* background-color: var(--primary-color); */
     color: black;
     /* text-align: left !important; */
     padding: 1rem;
@@ -932,7 +931,7 @@ footer ul{
     }
  
     .about-content p, .about-content{
-        border: 1px black solid;
+        /* border: 1px black solid; */
         width: 100%;
     }
 
