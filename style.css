@@ -111,6 +111,10 @@ nav {
     border-bottom: var(--primary-color) 2px solid;
 }
 
+
+
+
+
 .btn {
     background-color: var(--button-color);
     color: var(--primary-color);
@@ -160,6 +164,35 @@ nav {
 }
 .menu{
     display: none;
+    
+}
+.menu:hover{
+    cursor: pointer;
+}
+.mobile-nav {
+    display: none;
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 70%;
+    background: #ffffff56;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+/* .menu:hover  ~ .mobile-nav{
+    display: flex;
+    flex-direction: column;
+} */
+
+.mobile-nav {
+    display: none;
+}
+
+.mobile-nav.show {
+    display: flex;
+    flex-direction: column;
 }
 .container {
     max-width: 1200px;
@@ -168,7 +201,7 @@ nav {
     /* display: flex; */
 }
 section{
-    margin-bottom: 4rem ;
+    margin-bottom: 4rem !important;
     padding: 0 3rem ;
     display: flex;
     flex-direction: column;
@@ -867,7 +900,7 @@ footer ul{
     }
 }
 @media screen and (max-width: 800px){
-    section{padding :0 2rem;}
+    section{padding :0 4rem;}
     
     .nav-links{
         display: none;

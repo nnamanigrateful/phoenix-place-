@@ -37,10 +37,17 @@
                 <li><a href="services.html">Services</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            
             <div class="cta">
                 <a href="contact.html" class="btn">Get your Free Consult!</a>
             </div>
             <div class="menu"><img loading="lazy" src="media/menu.svg" alt=""></div>
+            <ul class="nav-links mobile-nav frosted-glass">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </nav>
     </header>
 
@@ -373,6 +380,11 @@
     </footer>
 
 
+    <script>
+        document.querySelector('.menu').addEventListener('click', () => {
+            document.querySelector('.mobile-nav').classList.toggle('show');
+        });
+    </script>
 </body>
 
 </html>
