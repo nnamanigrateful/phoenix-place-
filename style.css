@@ -29,7 +29,7 @@
     --font-size-header: clamp(1.3rem, 5vw, 3rem);
     --font-size-secondary-header: clamp(1rem, 3vw, 2.6rem);
     --font-size-subheader: 2rem;
-    --font-size-nav: clamp(.8rem, 2vw, 1.5rem);
+    --font-size-nav: clamp(.8rem, 1rem, .8rem);
     --font-size-paragraph: clamp(.8rem, 2vw, 1.5rem);
     --font-size-body-paragraph: clamp(.8rem, 1.2vw, 1.5rem);
     --font-size-small: 0.8rem;
@@ -54,6 +54,10 @@ h1{
 .sub-head{
     color: var(--primary-color);
     text-transform: uppercase;
+}
+
+.mobile-padding{
+    display: none;
 }
 
 body {
@@ -164,6 +168,8 @@ nav {
 }
 .menu{
     display: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
     
 }
 .menu:hover{
@@ -985,6 +991,9 @@ footer ul{
     .fee .inner{
         flex-direction: column;
         gap: 0;
+    }
+    .mobile-padding{
+        display: block;
     }
 
 
