@@ -15,10 +15,11 @@
 }
 :root{
     /* colors */
-    --primary-color: #3C210E;
+    --primary-color: #3B2424;
     --button-color: #FEDAC2;
     --accent-color: #FCF1E9;
     --accet2: #F5F1ED;
+    --accet3: #F8F4E9;
     --text-color: #635C56;
 
 
@@ -26,12 +27,13 @@
     --main-font: 'Archivo', sans-serif;
 
     /* font sizes */
-    --font-size-header: clamp(1.3rem, 5vw, 3rem);
+    --font-size-header: clamp(1.8rem, 5vw, 3rem);
     --font-size-secondary-header: clamp(1rem, 3vw, 2.6rem);
     --font-size-subheader: 2rem;
-    --font-size-nav: clamp(.8rem, 1rem, .8rem);
+    --font-size-nav: 1rem;
     --font-size-paragraph: clamp(.8rem, 2vw, 1.5rem);
     --font-size-body-paragraph: clamp(.8rem, 1.2vw, 1.5rem);
+    --font-size-body-paragraph2: clamp(.8rem, 1.2rem, 1rem);
     --font-size-small: 0.8rem;
 }
 .frosted-glass{
@@ -56,16 +58,54 @@ h1{
     text-transform: uppercase;
 }
 
-.mobile-padding{
-    display: none;
-}
-
 body {
     font-family: var(--main-font);
     color: var(--text-color);
     
 }
 
+
+
+.bento
+{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    /* gap: 1rem; */
+   
+}
+
+.bento-one {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+
+
+}
+.bento-one .one{
+    background-color:purple;
+    width: 65%;
+    height: 14rem;
+    /* border: 1px  black solid; */
+    border-radius: 84px;
+
+}
+.bento-one .one img, .bento-one .two img{
+    width: 100%;
+    height: 100%;
+    border-radius: 84px;
+    object-fit: cover;
+
+}
+.bento-one .two{
+    background-color: green;
+    width: 35%;
+    height: 14rem;
+    /* border: 1px  black solid; */
+    border-radius: 84px;
+
+}
 .container {
     /* border: 1px solid black; */
 }
@@ -74,9 +114,9 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 0 3rem;
     background-color: #fff;
-    
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
 }
 .logo{
     display: flex;
@@ -115,17 +155,15 @@ nav {
     border-bottom: var(--primary-color) 2px solid;
 }
 
-
-
-
-
 .btn {
-    background-color: var(--button-color);
+    /* background-color: var(--button-color); */
+    background: none;
     color: var(--primary-color);
     font-weight: bold;
     padding: 1rem 1.7rem;
     text-decoration: none;
     border-radius: 25px;
+    border: 1px solid var(--primary-color);
     width: fit-content;
     font-size: var(--font-size-nav);
 }
@@ -168,37 +206,6 @@ nav {
 }
 .menu{
     display: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-tap-highlight-color: transparent;
-    
-}
-.menu:hover{
-    cursor: pointer;
-}
-.mobile-nav {
-    display: none;
-    position: absolute;
-    top: 10%;
-    left: 0;
-    width: 70%;
-    background: #ffffff56;
-    padding: 1rem;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-/* .menu:hover  ~ .mobile-nav{
-    display: flex;
-    flex-direction: column;
-} */
-
-.mobile-nav {
-    display: none;
-}
-
-.mobile-nav.show {
-    display: flex;
-    flex-direction: column;
 }
 .container {
     max-width: 1200px;
@@ -207,7 +214,7 @@ nav {
     /* display: flex; */
 }
 section{
-    margin-bottom: 4rem !important;
+    margin-bottom: 4rem ;
     padding: 0 3rem ;
     display: flex;
     flex-direction: column;
@@ -217,33 +224,38 @@ section{
 .hero{
     width: 100;
     height: 100%;
-    padding: 5rem 0 !important;
-    background-image: url('media/therapy1.jpg');
+    padding: 5rem 3rem;
+    /* background-image: url('media/therapy1.jpg'); */
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
 }
 
 .hero-content{
-    width: 65%;
-    color: #fff;
+    max-width: 50%;
+    color: var(--primary-color);
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
-    padding: 2.5rem;
-    text-transform: capitalize;
-    margin-left: 1.5rem;
+    /* padding: 2.5rem 0; */
+    /* text-transform: capitalize; */
+    /* margin-left: 1.5rem; */
 }
 .hero-content h1{
     font-size: var(--font-size-header);
     font-family: var(--main-font);
 }
 .hero-content p{
-    font-size: var(--font-size-paragraph);
+    /* background-color: #24262b; */
+    width: 100%;
+    /* font-size: 1.2rem; */
+    font-size: var(--font-size-body-paragraph2) ;
     font-family: var(--main-font);
+    
 }
 
 
@@ -252,6 +264,7 @@ section{
 
 
 .about{
+    /* background-color: var(--primary-color); */
     color: black;
     /* text-align: left !important; */
     padding: 1rem;
@@ -906,7 +919,7 @@ footer ul{
     }
 }
 @media screen and (max-width: 800px){
-    section{padding :0 4rem;}
+    section{padding :0 2rem;}
     
     .nav-links{
         display: none;
@@ -916,7 +929,7 @@ footer ul{
         
     }
     .hero{
-        height: 90vh !important ;
+        padding: 3rem 1.7rem;
     }
     .hero-content{
         width: 80%;
@@ -954,10 +967,7 @@ footer ul{
     .contact-form{
         margin-top: 2rem;
     }
-    .process .one, .process .two, .process .three, .process .four{   
-        padding: 1.5rem 1.5rem;
-        width: 62%;
-        height: 13rem;}
+    
 }
 @media screen and (max-width: 650px){
     .container {
@@ -992,9 +1002,19 @@ footer ul{
         flex-direction: column;
         gap: 0;
     }
-    .mobile-padding{
-        display: block;
+
+    .hero{
+        flex-direction: column;
     }
+    .bento
+{
+    width: 70%;
+}
+.hero-content{
+    max-width: 70%;
+    margin-bottom: 3rem;
+    
+}
 
 
 
@@ -1018,20 +1038,6 @@ footer ul{
         margin-bottom: .7rem;
         
     }
-    .contact-form{
-        width: 100%;
-    }
-    .contact-info {
-        width: 100%;
-    }
-    .contact .container{
-        padding: 2rem;
-        border-radius: 20px;
-    }
-    .process .one, .process .two, .process .three, .process .four{   
-        padding: 1.5rem 1rem;
-        width: 65%;
-        height: 15rem;}
 
 
 
@@ -1050,21 +1056,11 @@ footer ul{
     }
     .hero{
         height: 70vh !important ;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
     }
     .hero-content{
-        width: 92%;
-
-        
+        width: 100%;
         
     }
-    .hero-content h1{
-        /* font-size: 99%; */
-      }
     .about{
         flex-direction: column;
         padding: 0;
@@ -1093,16 +1089,7 @@ footer ul{
         padding: 2rem;
         border-radius: 20px;
     }
-    .process .one, .process .two, .process .three, .process .four{   
-        padding: 1.5rem .8rem;
-        width: 100%;
-        height: 16rem;
-        margin: .5rem;
-    }
-    .process-card h3{
-        font-size: 95% !important;
-        
-    }
-        
+
+    
   
 }
