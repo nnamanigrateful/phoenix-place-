@@ -474,8 +474,9 @@ section {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-top: 3rem;
-
+    margin: 3rem 0;
+    border-bottom: #3b24241a solid 1px;
+    border-width: thin;
 }
 
 .hero-content {
@@ -514,6 +515,7 @@ section {
     /* text-align: left !important; */
     padding: 1rem;
     text-align: center;
+    margin: 2rem 0;
     /* margin-bottom: ; */
 }
 
