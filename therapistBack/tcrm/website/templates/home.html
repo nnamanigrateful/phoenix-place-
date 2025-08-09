@@ -1,0 +1,205 @@
+
+
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+
+
+<li><a href="#" onclick="Alert.success('Success! This alert box indicates a successful or positive action. ','Success',{displayDuration: 3000, pos: 'top'})">
+    {% if messages%}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+    {% endif %}
+
+</a></li>
+
+
+    <section class="hero">
+
+        <div class="hero-content ">
+            <h1>Take the first step to healing and rediscovery</h1>
+            <p class="hero-p">Like the phoenix, healing is not the absence of fire but the courage to rise, again and
+                again, from the ashes of our pain.
+
+            </p>
+            <br>
+            <a href="contact.html" class="btn"
+                style="display: flex; justify-content: center;align-items: center; gap: 1rem;">Book a Free
+                Consultation
+
+            </a>
+        </div>
+        <div class="bento">
+
+            <img src="media/Frame 4.png" alt="">
+
+           
+
+        </div>
+
+    </section>
+
+    <section class="about">
+
+        <div class="about-content">
+            <p class="sub-head">About Phoenix Place</p>
+            <h2>A space to feel seen, heard, and understood</h2>
+            <p>Hi, I'm Dumebi Onyejiaka, a qualified and experienced therapist based in Sheffield, UK. I offer a
+                safe, confidential and non-judgemental space for you to explore your thoughts and feelings. I work
+                with a range of issues including anxiety, depression, trauma, relationship issues, and more. I am
+                here to support you on your journey towards healing, growth and rediscovery.</p>
+            <a href="about.html" class="btn2">Learn More about us</a>
+        </div>
+
+
+
+    </section>
+
+    <section class="bento-section">
+
+
+   
+        </div>
+    </section>
+
+
+ 
+
+   
+    <section class="service2">
+
+        <div class="img-grid">
+            <div class="img1">
+                <img src="media/woman-crying-while-sharing-emotions-with-psychoana-PQQS9W2.jpg" alt="">
+            </div>
+            <div class="img2">
+                <div class="inner1 inner">
+                    <img src="media/couples counceling.jpg" alt="">
+                </div>
+                <div class="inner2 inner"></div>
+                
+                <!-- <img src="" alt=""> -->
+            </div>
+        </div>
+
+        <div class="service-content">
+            <p class="sub-head">Service highlights</p>
+            <h2>Individualized care for your mental health</h2>
+            
+
+            <br>
+            <div class="type" style="margin-bottom: 2rem;">
+                <div class="service-icon">
+                    <img src="media/Individual therapy.png" alt="">
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem;">IndividualnTherapy</h4>
+                    <p>Personalized, one-on-one sessions focused on healing, growth, and emotional well-being.</p>
+                </div>
+            </div>
+            <div class="type"  style="margin-bottom: 3rem;">
+                <div class="service-icon" >
+                    <img src="media/Couple therapy.png" alt="">
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem;">couples Counseling</h4>
+                    <p>Personalized, one-on-one sessions focused on healing, growth, and emotional well-being.</p>
+                </div>
+            </div>
+            <br>
+            <a href="services.html" class="btn" >Explore Service</a>
+        </div>
+
+    </section>
+    <section class="Fee">
+        <div class="container">
+            <div class="fee">
+                <h1>Fees</h1>
+                <!-- <p><strong>£65 - £90</strong></p> -->
+                <p><strong>Free initial Online Consultation</strong></p>
+                <br>
+
+                <h2>What we offer</h2>
+                <div class="inner">
+                    <div>
+                        <div class="included">
+                            <img src="media/tick-square.svg" alt="">
+                            <p><strong>Online Session</strong></p>
+                            
+
+                        </div>
+                        <div class="included">
+                            <img src="media/tick-square.svg" alt="">
+                            <p><strong>50-minute sessions</strong></p>
+                        </div>
+                        <div class="included">
+                            <img src="media/tick-square.svg" alt="">
+                            <p><strong>£70</strong></p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="included">
+                            <img src="media/tick-square.svg" alt="">
+                            <p><strong>In-person Sessions</strong></p>
+                        </div>
+                        <div class="included">
+                            <img src="media/tick-square.svg" alt="">
+                            <p><strong>Flexible scheduling</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    
+
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-info">
+                <p class="sub-head">Book a Free consultation</p>
+                <h2>Free Consultation - Begin Your Healing Journey</h2>
+                <p class="contact-p">Connect with a dedicated specialist today and take the first step towards a
+                    healthier, more fulfilling life.</p>
+
+                <p class="email icon"><img loading="lazy" src="media/email.svg" alt="">dumebi.ppt@gmail.com</p>
+                <p class="phone icon"><img loading="lazy" src="media/email.svg" alt=""> +44 *** ***</p>
+                <p class="address icon"><img loading="lazy" src="media/location.svg" alt=""> 101 E 129th St, East
+                    Chicago, IN 46312, UK</p>
+
+                <a href="">Open Map <img loading="lazy" src="media/arrow-right.svg" alt=""></a>
+
+            </div>
+            <div class="contact-form">
+                <h3>Get a free consultation</h3>
+                <form action="{% url 'home' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="firstName" placeholder="First Name" required>
+                    <input type="text" name="lastName" placeholder="Last Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="tel" name="phone" placeholder="Phone" required>
+                    <textarea name="message" placeholder="Message" required></textarea>
+                    <button type="submit" class="btn submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+
+   {% endblock %}
+
+
+
+
+
+

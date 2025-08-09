@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>phoenix</title> -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            padding-top: 80px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3B2424;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #5a3636;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #3B2424;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #5a3636;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #3B2424;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: #3B2424;
+            color: white !important;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #3B2424;
+        }
+
+        .cta-button:hover {
+            background-color: white;
+            color: #3B2424 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(59, 36, 36, 0.2);
+        }
+
+        .cta-button::after {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #3B2424;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 50px;
+                gap: 30px;
+                transition: left 0.3s ease;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 18px;
+            }
+
+            .cta-button {
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .nav-container {
+                height: 60px;
+            }
+
+            .nav-links {
+                top: 60px;
+                height: calc(100vh - 60px);
+            }
+
+            body {
+                padding-top: 60px;
+            }
+        }
+
+
+        .footer {
+            background-color: #3B2424;
+            padding: 40px 20px 20px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .contact-info {
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background-color: white;
+            color: #3B2424;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+            color: #3B2424;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #ccc;
+            font-size: 13px;
+        }
+
+        .footer-bottom a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom a:hover {
+            color: #f0f0f0;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer {
+                padding: 30px 15px 15px;
+            }
+
+
+
+
+
+
+            /* ALERTS */
+            
+.alert-message {line-height:20px; font-size:15px;padding-bottom: 12px;}
+h1{color:#e35154 !important; font-size:18px; margin-left:20px; margin-bottom:20px;font-weight:700; text-transform: uppercase;}
+
+body a, body #test {
+  color: #fff;
+}
+
+.unstyled {
+  margin: 0;
+  list-style: none;
+}
+.unstyled a, .unstyled #test {
+  width: 120px;
+  text-decoration: none;
+  padding: .5em 1em;
+  background-color: #213347;
+  border-radius: 4px;
+  display: block;
+  margin-bottom: .5em;
+  font-size:15px;
+  font-weight:300;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.unstyled a:hover, .unstyled #test:hover {
+  background-color: #f25c5d;
+}
+
+.cf, .alert {
+  zoom: 1;
+}
+.cf:before, .alert:before, .cf:after, .alert:after {
+  display: table; 
+  content: "";
+  line-height: 0;
+}
+.cf:after, .alert:after {
+  clear: both;
+}
+
+#alerts {
+  width: 400px;
+  top: 12px;
+  right: 50px;
+  position: fixed;
+  z-index: 9999;
+  list-style: none;
+}
+
+.alert {
+  width: 100%;
+  margin-bottom: 8px;
+  display: block;
+  position: relative;
+  border-left: 4px solid;
+  right: -50px;
+  opacity: 0;
+  line-height: 1;
+  padding: 0;
+  transition: right 400ms, opacity 400ms, line-height 300ms 100ms, padding 300ms 100ms;
+  display: table;
+}
+
+.alert:hover {
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.open {
+  right: 0;
+  opacity: 1;
+  line-height: 2;
+  padding: 3px 15px;
+  transition: line-height 200ms, padding 200ms, right 350ms 200ms, opacity 350ms 200ms;
+}
+
+.alert-title {
+  font-weight: bold;
+}
+
+.alert-block {
+  width: 80%;
+  width: -webkit-calc(100% - 10px);
+  width: calc(100% - 10px);
+  text-align: left;
+}
+.alert-block em, .alert-block small {
+  font-size: .75em;
+  opacity: .75;
+  display: block;
+}
+
+.alert i {
+  font-size: 2em;
+  width: 1.5em;
+  max-height: 48px;
+  top: 50%;
+  margin-top: -12px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.alert-success {
+  color: #fff;
+  border-color: #539753;
+  background-color: #8fbf2f;
+}
+
+.alert-error {
+  color: #fff;
+  border-color: #dc4a4d;
+  background-color: #f25c5d;
+}
+
+.alert-trash {
+  color: #fff;
+  border-color: #dc4a4d;
+  background-color: #f25c5d;
+}
+
+.alert-info {
+  color: #fff;
+  border-color: #076d91;
+  background-color: #3397db;
+}
+
+.alert-warning {
+  color: #fff;
+  border-color: #dd6137;
+  background-color: #f7931d;
+}
+
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#" class="logo"
+                    style=" text-transform: uppercase; display: flex; align-items: center; font-family: 'Manrope'; font-weight: 300; font-size: 1.4rem;"><img
+                        src="media/logo.png" style="width: 5.5rem; padding: .8rem; "> </a>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                    <li><a href="{% url 'about' %}" style="font-weight: 400;">About</a></li>
+                    <li><a href="{% url 'services' %}" style="font-weight: 400;">Services</a></li>
+                    <li><a href="{% url 'home' %}#contact" style="font-weight: 400;">Contact</a></li>
+                    <li><a href="" class="mobile-cta">Book a Free Consultation</a></li>
+                </ul>
+
+                <a href="#contact" class="cta-button">Book a Free Consultation</a>
+
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- <nav>
+            <div class="logo">
+                <img loading="lazy" src="media/logo.png">
+                <h1></h1>
+            </div>
+            <ul class="nav-links">
+                <li style="font-weight: bolder;"><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="cta">
+                <a href="contact.html" class="btn">Get your Free Consult!</a>
+            </div>
+            <div class="menu"><img loading="lazy" src="media/menu.svg" alt=""></div>
+        </nav> -->
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Main content goes here -->
+        {% endblock %}
+
+
+
+
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Phoenix Place</h3>
+                        <p>In the heart of every breakdown lies the ember of rebirth; like the phoenix, we are not
+                            ruined by the fire, we are revealed by it.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook">f</a>
+                            <a href="#" aria-label="Instagram">i</a>
+                            <a href="#" aria-label="LinkedIn">in</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                            <li><a href="#consultation">Book Consultation</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <div class="contact-info">
+                            <p><strong>Phone:</strong> (555) 123-4567</p>
+                        </div>
+                        <div class="contact-info">
+                            <p><strong>Email:</strong> hello@phoenixplace.com</p>
+                        </div>
+                        <div class="contact-info">
+                            <p><strong>Address:</strong><br>
+                                123 Wellness Way<br>
+                                Suite 100<br>
+                                Your City, State 12345</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Phoenix Place Psychotherapy. All rights reserved. |
+                        <a href="#privacy">Privacy Policy</a> |
+                        <a href="#terms">Terms of Service</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>company</h4>
+
+                </div>
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">about us</a></li>
+                        <li><a href="#">our services</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#">affiliate program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Individual Therapy</a></li>
+                        <li><a href="#">Relationship</a></li>
+                        <li><a href="#">Family conflicts</a></li>
+                        <li><a href="#">parenting issues</a></li>
+                        <li><a href="#">Compassion fatigue</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+
+        <!-- <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside (mobile)
+        document.addEventListener('click', function(event) {
+            if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        
+    </script> -->
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const hamburger = document.getElementById('hamburger');
+                const navLinks = document.getElementById('navLinks');
+
+                hamburger.addEventListener('click', function () {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+
+                // Close menu when clicking on a link (mobile)
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+
+                // Close menu when clicking outside (mobile)
+                document.addEventListener('click', function (event) {
+                    if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+
+
+
+
+
+
+
+
+
+
+
+            var Alert = undefined;
+
+            (function (Alert) {
+                var alert, error, trash, info, success, warning, _container;
+                info = function (message, title, options) {
+                    return alert("info", message, title, "fa fa-info-circle", options);
+                };
+                warning = function (message, title, options) {
+                    return alert("warning", message, title, "fa fa-warning", options);
+                };
+                error = function (message, title, options) {
+                    return alert("error", message, title, "fa fa-exclamation-circle", options);
+                };
+
+                trash = function (message, title, options) {
+                    return alert("trash", message, title, "fa fa-trash-o", options);
+                };
+
+                success = function (message, title, options) {
+                    return alert("success", message, title, "fa fa-check-circle", options);
+                };
+                alert = function (type, message, title, icon, options) {
+                    var alertElem, messageElem, titleElem, iconElem, innerElem, _container;
+                    if (typeof options === "undefined") {
+                        options = {};
+                    }
+                    options = $.extend({}, Alert.defaults, options);
+                    if (!_container) {
+                        _container = $("#alerts");
+                        if (_container.length === 0) {
+                            _container = $("<ul>").attr("id", "alerts").appendTo($("body"));
+                        }
+                    }
+                    if (options.width) {
+                        _container.css({
+                            width: options.width
+                        });
+                    }
+                    alertElem = $("<li>").addClass("alert").addClass("alert-" + type);
+                    setTimeout(function () {
+                        alertElem.addClass('open');
+                    }, 1);
+                    if (icon) {
+                        iconElem = $("<i>").addClass(icon);
+                        alertElem.append(iconElem);
+                    }
+                    innerElem = $("<div>").addClass("alert-block");
+                    //innerElem = $("<i>").addClass("fa fa-times");
+                    alertElem.append(innerElem);
+                    if (title) {
+                        titleElem = $("<div>").addClass("alert-title").append(title);
+                        innerElem.append(titleElem);
+
+                    }
+                    if (message) {
+                        messageElem = $("<div>").addClass("alert-message").append(message);
+                        //innerElem.append("<i class="fa fa-times"></i>");
+                        innerElem.append(messageElem);
+                        //innerElem.append("<em>Click to Dismiss</em>");
+                        //      innerElemc = $("<i>").addClass("fa fa-times");
+
+                    }
+                    if (options.displayDuration > 0) {
+                        setTimeout((function () {
+                            leave();
+                        }), options.displayDuration);
+                    } else {
+                        innerElem.append("<em>Click to Dismiss</em>");
+                    }
+                    alertElem.on("click", function () {
+                        leave();
+                    });
+
+                    function leave() {
+                        alertElem.removeClass('open');
+                        alertElem.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+                            return alertElem.remove();
+                        });
+                    }
+                    return _container.prepend(alertElem);
+                };
+                Alert.defaults = {
+                    width: "",
+                    icon: "",
+                    displayDuration: 3000,
+                    pos: ""
+                };
+                Alert.info = info;
+                Alert.warning = warning;
+                Alert.error = error;
+                Alert.trash = trash;
+                Alert.success = success;
+                return _container = void 0;
+
+            })(Alert || (Alert = {}));
+
+            this.Alert = Alert;
+
+            $('#test').on('click', function () {
+                Alert.info('Message');
+            });
+        </script>
+
+
+</body>
+
+</html>
