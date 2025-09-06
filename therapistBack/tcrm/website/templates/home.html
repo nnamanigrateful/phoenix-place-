@@ -1,6 +1,9 @@
-
-
 {% extends "base.html" %}
+
+{% load static %}
+
+
+
 
 
 
@@ -35,7 +38,7 @@
         </div>
         <div class="bento">
 
-            <img src="media/Frame 4.png" alt="">
+            <img src="{% static 'media/Frame 4.png' %}" alt="">
 
            
 
@@ -74,11 +77,11 @@
 
         <div class="img-grid">
             <div class="img1">
-                <img src="media/woman-crying-while-sharing-emotions-with-psychoana-PQQS9W2.jpg" alt="">
+                <img src="{% static 'media/woman-crying-while-sharing-emotions-with-psychoana-PQQS9W2.jpg' %}" alt="">
             </div>
             <div class="img2">
                 <div class="inner1 inner">
-                    <img src="media/couples counceling.jpg" alt="">
+                    <img src="{% static 'media/couples counceling.jpg' %}" alt="">
                 </div>
                 <div class="inner2 inner"></div>
                 
@@ -94,7 +97,7 @@
             <br>
             <div class="type" style="margin-bottom: 2rem;">
                 <div class="service-icon">
-                    <img src="media/Individual therapy.png" alt="">
+                    <img src="{% static 'media/Individual therapy.png' %}" alt="">
                 </div>
                 <div>
                     <h4 style="margin-bottom: 1rem;">IndividualnTherapy</h4>
@@ -103,7 +106,7 @@
             </div>
             <div class="type"  style="margin-bottom: 3rem;">
                 <div class="service-icon" >
-                    <img src="media/Couple therapy.png" alt="">
+                    <img src="{% static 'media/Couple therapy.png' %}" alt="">
                 </div>
                 <div>
                     <h4 style="margin-bottom: 1rem;">couples Counseling</h4>
@@ -111,7 +114,7 @@
                 </div>
             </div>
             <br>
-            <a href="services.html" class="btn" >Explore Service</a>
+            <a href="{% url 'services' %}" class="btn" >Explore Service</a>
         </div>
 
     </section>
@@ -127,27 +130,27 @@
                 <div class="inner">
                     <div>
                         <div class="included">
-                            <img src="media/tick-square.svg" alt="">
+                            <img src="{% static 'media/tick-square.svg' %}" alt="">
                             <p><strong>Online Session</strong></p>
                             
 
                         </div>
                         <div class="included">
-                            <img src="media/tick-square.svg" alt="">
+                            <img src="{% static 'media/tick-square.svg' %}" alt="">
                             <p><strong>50-minute sessions</strong></p>
                         </div>
                         <div class="included">
-                            <img src="media/tick-square.svg" alt="">
+                            <img src="{% static 'media/tick-square.svg' %}" alt="">
                             <p><strong>£70</strong></p>
                         </div>
                     </div>
                     <div>
                         <div class="included">
-                            <img src="media/tick-square.svg" alt="">
+                            <img src="{% static 'media/tick-square.svg' %}" alt="">
                             <p><strong>In-person Sessions</strong></p>
                         </div>
                         <div class="included">
-                            <img src="media/tick-square.svg" alt="">
+                            <img src="{% static 'media/tick-square.svg' %}" alt="">
                             <p><strong>Flexible scheduling</strong></p>
                         </div>
                     </div>
@@ -170,12 +173,12 @@
                 <p class="contact-p">Connect with a dedicated specialist today and take the first step towards a
                     healthier, more fulfilling life.</p>
 
-                <p class="email icon"><img loading="lazy" src="media/email.svg" alt="">dumebi.ppt@gmail.com</p>
-                <p class="phone icon"><img loading="lazy" src="media/email.svg" alt=""> +44 *** ***</p>
-                <p class="address icon"><img loading="lazy" src="media/location.svg" alt=""> 101 E 129th St, East
+                <p class="email icon"><img loading="lazy" src="{% static 'media/email.svg' %}" alt="">dumebi.ppt@gmail.com</p>
+                <p class="phone icon"><img loading="lazy" src="{% static 'media/email.svg' %}" alt=""> +44 *** ***</p>
+                <p class="address icon"><img loading="lazy" src="{% static 'media/location.svg' %}" alt=""> 101 E 129th St, East
                     Chicago, IN 46312, UK</p>
 
-                <a href="">Open Map <img loading="lazy" src="media/arrow-right.svg" alt=""></a>
+                <a href="">Open Map <img loading="lazy" src="{% static 'media/arrow-right.svg' %}" alt=""></a>
 
             </div>
             <div class="contact-form">

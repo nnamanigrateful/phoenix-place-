@@ -2,9 +2,550 @@
 
 {% extends "base.html" %}
 
+{% load static %}
 
 
 {% block content %}
+
+
+
+
+
+<style>
+    
+        
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 80px 0 60px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: #3B2424;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            display: grid;
+            gap: 100px;
+            padding: 40px 0 80px;
+        }
+
+        .image-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin: 60px 0;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .image-container.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 36, 36, 0.1), rgba(90, 54, 54, 0.05));
+            z-index: 1;
+        }
+
+        .placeholder-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 50%, #f0f0f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #999;
+            position: relative;
+        }
+        .placeholder-image img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-text {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s ease 0.2s;
+        }
+
+        .image-text.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .image-text h3 {
+            font-size: 1.5rem;
+            color: #3B2424;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .image-text p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .section-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: #3B2424;
+            margin-bottom: 30px;
+            font-weight: 400;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #3B2424, #5a3636);
+            border-radius: 2px;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        .qualifications-timeline {
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .qualifications-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #3B2424, #8B6B6B, #3B2424);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 80px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            background: #3B2424;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #3B2424;
+            z-index: 2;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #3B2424;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 12px solid white;
+        }
+
+        .qualification-level {
+            display: inline-block;
+            background: linear-gradient(45deg, #3B2424, #5a3636);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #3B2424;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .qualification-year {
+            position: absolute;
+            left: -60px;
+            top: 15px;
+            background: #f8f8f8;
+            color: #3B2424;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            display: none;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 808px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 50px;
+                gap: 30px;
+                transition: left 0.3s ease;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                transform: none;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-container .cta-button {
+                display: none;
+            }
+
+            .mobile-cta {
+                display: block;
+                background-color: #3B2424;
+                color: white !important;
+                padding: 12px 24px;
+                border-radius: 30px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                border: 2px solid #3B2424;
+                text-decoration: none;
+                margin-top: 30px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-card {
+                padding: 40px 30px;
+                margin: 0 10px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .image-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .placeholder-image {
+                height: 300px;
+            }
+
+            .image-text {
+                padding: 30px 25px;
+            }
+
+            .qualifications-timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                padding-left: 60px;
+            }
+
+            .timeline-item::before {
+                left: 10px;
+            }
+
+            .qualification-year {
+                position: static;
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+
+            .timeline-content::before {
+                left: -10px;
+            }
+
+            .about-container {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 40px 0;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-card {
+                padding: 30px 20px;
+                margin: 0 5px;
+            }
+        }
+</style>
+
+
+
+   <main class="about-container">
+        <section class="hero-section">
+            <h1 class="hero-title">About Me</h1>
+            <p class="hero-subtitle">Creating space for healing through connection and understanding</p>
+        </section>
+
+        <div class="content-section">
+            <div class="section-card">
+                <h2 class="section-title">Welcome</h2>
+                <p class="section-text">
+                    I'm a relational integrative psychotherapist, and I offer a warm, collaborative space where you can explore what's troubling you in the context of a safe, supportive relationship. My approach is grounded in the belief that healing happens through connection—both with ourselves and with others.
+                </p>
+                <br>
+                <p class="section-text">
+                    Drawing from a range of therapeutic traditions, I work in a way that's tailored to you. Whether you're navigating anxiety, relationship challenges, trauma, or questions about identity and meaning, we can work together to better understand your patterns, deepen self-awareness, and support lasting change.
+                </p>
+            </div>
+
+            <div class="image-section">
+                <div class="image-container">
+                    <div class="placeholder-image">
+                        <img src="{% static 'media/about (3).jpg' %}"  alt="">
+                    </div>
+                </div>
+                <div class="image-text">
+                    <h3>A Personal Approach</h3>
+                    <p>Every individual's journey is unique. I believe in creating a therapeutic environment where you feel truly heard and understood. Through our work together, we'll explore your experiences with curiosity and compassion, allowing space for genuine healing and growth.</p>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2 class="section-title">Qualifications & Training</h2>
+                <p class="section-text">
+                    My professional journey has been shaped by comprehensive training and ongoing development in the field of psychotherapy and counselling. Each qualification represents a deepening commitment to understanding human experience and therapeutic practice.
+                </p>
+                
+                <div class="qualifications-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="qualification-level">Master's Level</div>
+                            <div class="timeline-title">MA Integrative Counselling and Psychotherapy</div>
+                            <div class="timeline-desc">Advanced postgraduate training combining multiple therapeutic approaches, including psychodynamic, humanistic, and cognitive-behavioral perspectives to create a comprehensive understanding of therapeutic practice.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="qualification-level">Bachelor's Level</div>
+                            <div class="timeline-title">BSc Psychology</div>
+                            <div class="timeline-desc">Comprehensive foundation degree covering psychological theory, research methods, and human behavior, providing essential scientific understanding of mental processes and therapeutic interventions.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="qualification-level">Level 3</div>
+                            <div class="timeline-title">Certificate in Counselling Studies</div>
+                            <div class="timeline-desc">Specialized training in counselling theory and practice, covering essential skills in active listening, therapeutic boundaries, and ethical practice within the counselling profession.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="qualification-level">Level 2</div>
+                            <div class="timeline-title">Certificate in Counselling Skills</div>
+                            <div class="timeline-desc">Foundational training in essential counselling techniques, communication skills, and the fundamental principles of therapeutic relationships and supportive practice.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="qualification-level">Professional</div>
+                            <div class="timeline-title">Continuing Professional Development</div>
+                            <div class="timeline-desc">Regular ongoing training and development including workshops, supervision, and specialized courses to enhance therapeutic skills, stay current with best practices, and deepen understanding of emerging therapeutic approaches.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="doings">
+        <div class="container">
+
+            <div class="why-us">
+                <p class="sub-head">Why Choose Us</p>
+                <h2>Benefits of Choosing Phoenix Place</h2>
+
+
+                <div class="reasons">
+                    <div class="reason1 reason">
+                        <h3><img loading="lazy" src="{% static 'media/tick-circle.svg' %}" alt="">Top Psychologist:</h3>
+                        <p>I am a highly qualified proffessional with an MSc and experienced in the field of psychology
+                            and therapy.
+                        </p>
+                    </div>
+                    <div class="reason2 reason">
+                        <h3><img loading="lazy" src="{% static 'media/tick-circle.svg' %}" alt="">Effective Methods:</h3>
+                        <p>I use modern, proven therapeutic methods to help you achieve a balanced and more fulfilling
+                            life.</p>
+                    </div>
+                    <div class="reason3 reason">
+                        <h3><img loading="lazy" src="{% static 'media/tick-circle.svg' %}" alt="">Ongoing Support:</h3>
+                        <p>I provide support not only during therapy sessions but also with advice and guidance after
+                            each session.</p>
+                    </div>
+                    <a href="" class="btn2" style="margin-top: 5rem !important;">Cotact Us Now</a>
+                </div>
+
+
+            </div>
+            
+        </div>
+
+    </section>
+    <section class="faq">
+        <div class="box">
+            <h1>Frequently Asked Questions</h1>
+            <div class="faqs">
+
+              
+                {% for faq in faqs %}
+                <details>
+                    <summary>{{faq.question}}</summary>
+                    <p>{{faq.answer}}</p>
+                </details>
+                {% endfor %}
+               
+            </div>
+        </div>
+    </section>
+
+
 
 
 

@@ -6,6 +6,7 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
+from .models import Services, Faq# Assuming you have a Services model defined
 
 
 # Create your views here.
@@ -64,10 +65,12 @@ def home(request):
 
 
 def about(request):
-    return render(request, 'about.html', {})
+    faqs = Faq.objects.all()
+    return render(request, 'about.html', {'faqs': faqs})
     
 def services(request):
-    return render(request, 'services.html', {})
+    services = Services.objects.all()
+    return render(request, 'services.html', {'services': services})
    
 def login_admin(request):
     pass

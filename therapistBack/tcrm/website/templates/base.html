@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>phoenix</title> -->
-    <link rel="stylesheet" href="style.css">
+     <link rel="icon" type="image/png" href="{% static 'media/favicon-32x32.png' %}" sizes="64x64">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -318,7 +322,7 @@
             /* ALERTS */
             
 .alert-message {line-height:20px; font-size:15px;padding-bottom: 12px;}
-h1{color:#e35154 !important; font-size:18px; margin-left:20px; margin-bottom:20px;font-weight:700; text-transform: uppercase;}
+.alert-message h1{color:#e35154 !important; font-size:18px; margin-left:20px; margin-bottom:20px;font-weight:700; text-transform: uppercase;}
 
 body a, body #test {
   color: #fff;
@@ -461,7 +465,7 @@ body a, body #test {
             <div class="nav-container">
                 <a href="#" class="logo"
                     style=" text-transform: uppercase; display: flex; align-items: center; font-family: 'Manrope'; font-weight: 300; font-size: 1.4rem;"><img
-                        src="media/logo.png" style="width: 5.5rem; padding: .8rem; "> </a>
+                        src="{% static 'media/logo.png' %}" style="width: 5.5rem; padding: .8rem; "> </a>
 
                 <ul class="nav-links" id="navLinks">
                     <li><a href="{% url 'home' %}" class="active">Home</a></li>
@@ -626,143 +630,202 @@ body a, body #test {
     </script> -->
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const hamburger = document.getElementById('hamburger');
-                const navLinks = document.getElementById('navLinks');
+            document.addEventListener('DOMContentLoaded', function() {
+    // Navigation functionality
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
 
-                hamburger.addEventListener('click', function () {
-                    hamburger.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                });
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
 
-                // Close menu when clicking on a link (mobile)
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                    });
-                });
+        // Close menu when clicking on a link (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
 
-                // Close menu when clicking outside (mobile)
-                document.addEventListener('click', function (event) {
-                    if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                    }
+        // Close menu when clicking outside (mobile)
+        document.addEventListener('click', function(event) {
+            if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+    }
+
+    // Page animations (for about page and other pages)
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    // Regular observer for non-timeline elements
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements that need immediate animation (excluding timeline items)
+    document.querySelectorAll('.section-card, .image-container, .image-text').forEach(element => {
+        observer.observe(element);
+    });
+
+    // Separate staggered animation ONLY for timeline items
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    if (timelineItems.length > 0) {
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const allTimelineItems = Array.from(timelineItems);
+                    const index = allTimelineItems.indexOf(entry.target);
+                    
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 200); // 200ms delay between each item
+                }
+            });
+        }, observerOptions);
+
+        timelineItems.forEach(item => {
+            timelineObserver.observe(item);
+        });
+    }
+});
+
+// Alert system (keep this separate from DOMContentLoaded)
+var Alert = undefined;
+
+(function (Alert) {
+    var alert, error, trash, info, success, warning, _container;
+    
+    info = function (message, title, options) {
+        return alert("info", message, title, "fa fa-info-circle", options);
+    };
+    
+    warning = function (message, title, options) {
+        return alert("warning", message, title, "fa fa-warning", options);
+    };
+    
+    error = function (message, title, options) {
+        return alert("error", message, title, "fa fa-exclamation-circle", options);
+    };
+
+    trash = function (message, title, options) {
+        return alert("trash", message, title, "fa fa-trash-o", options);
+    };
+
+    success = function (message, title, options) {
+        return alert("success", message, title, "fa fa-check-circle", options);
+    };
+    
+    alert = function (type, message, title, icon, options) {
+        var alertElem, messageElem, titleElem, iconElem, innerElem, _container;
+        
+        if (typeof options === "undefined") {
+            options = {};
+        }
+        
+        // Note: This requires jQuery - make sure jQuery is loaded if you use alerts
+        if (typeof $ !== 'undefined') {
+            options = $.extend({}, Alert.defaults, options);
+            
+            if (!_container) {
+                _container = $("#alerts");
+                if (_container.length === 0) {
+                    _container = $("<ul>").attr("id", "alerts").appendTo($("body"));
+                }
+            }
+            
+            if (options.width) {
+                _container.css({
+                    width: options.width
                 });
+            }
+            
+            alertElem = $("<li>").addClass("alert").addClass("alert-" + type);
+            
+            setTimeout(function () {
+                alertElem.addClass('open');
+            }, 1);
+            
+            if (icon) {
+                iconElem = $("<i>").addClass(icon);
+                alertElem.append(iconElem);
+            }
+            
+            innerElem = $("<div>").addClass("alert-block");
+            alertElem.append(innerElem);
+            
+            if (title) {
+                titleElem = $("<div>").addClass("alert-title").append(title);
+                innerElem.append(titleElem);
+            }
+            
+            if (message) {
+                messageElem = $("<div>").addClass("alert-message").append(message);
+                innerElem.append(messageElem);
+            }
+            
+            if (options.displayDuration > 0) {
+                setTimeout((function () {
+                    leave();
+                }), options.displayDuration);
+            } else {
+                innerElem.append("<em>Click to Dismiss</em>");
+            }
+            
+            alertElem.on("click", function () {
+                leave();
             });
 
+            function leave() {
+                alertElem.removeClass('open');
+                alertElem.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+                    return alertElem.remove();
+                });
+            }
+            
+            return _container.prepend(alertElem);
+        } else {
+            console.warn('jQuery is required for Alert system');
+        }
+    };
+    
+    Alert.defaults = {
+        width: "",
+        icon: "",
+        displayDuration: 3000,
+        pos: ""
+    };
+    
+    Alert.info = info;
+    Alert.warning = warning;
+    Alert.error = error;
+    Alert.trash = trash;
+    Alert.success = success;
+    
+    return _container = void 0;
 
+})(Alert || (Alert = {}));
 
+this.Alert = Alert;
 
-
-
-
-
-
-
-
-            var Alert = undefined;
-
-            (function (Alert) {
-                var alert, error, trash, info, success, warning, _container;
-                info = function (message, title, options) {
-                    return alert("info", message, title, "fa fa-info-circle", options);
-                };
-                warning = function (message, title, options) {
-                    return alert("warning", message, title, "fa fa-warning", options);
-                };
-                error = function (message, title, options) {
-                    return alert("error", message, title, "fa fa-exclamation-circle", options);
-                };
-
-                trash = function (message, title, options) {
-                    return alert("trash", message, title, "fa fa-trash-o", options);
-                };
-
-                success = function (message, title, options) {
-                    return alert("success", message, title, "fa fa-check-circle", options);
-                };
-                alert = function (type, message, title, icon, options) {
-                    var alertElem, messageElem, titleElem, iconElem, innerElem, _container;
-                    if (typeof options === "undefined") {
-                        options = {};
-                    }
-                    options = $.extend({}, Alert.defaults, options);
-                    if (!_container) {
-                        _container = $("#alerts");
-                        if (_container.length === 0) {
-                            _container = $("<ul>").attr("id", "alerts").appendTo($("body"));
-                        }
-                    }
-                    if (options.width) {
-                        _container.css({
-                            width: options.width
-                        });
-                    }
-                    alertElem = $("<li>").addClass("alert").addClass("alert-" + type);
-                    setTimeout(function () {
-                        alertElem.addClass('open');
-                    }, 1);
-                    if (icon) {
-                        iconElem = $("<i>").addClass(icon);
-                        alertElem.append(iconElem);
-                    }
-                    innerElem = $("<div>").addClass("alert-block");
-                    //innerElem = $("<i>").addClass("fa fa-times");
-                    alertElem.append(innerElem);
-                    if (title) {
-                        titleElem = $("<div>").addClass("alert-title").append(title);
-                        innerElem.append(titleElem);
-
-                    }
-                    if (message) {
-                        messageElem = $("<div>").addClass("alert-message").append(message);
-                        //innerElem.append("<i class="fa fa-times"></i>");
-                        innerElem.append(messageElem);
-                        //innerElem.append("<em>Click to Dismiss</em>");
-                        //      innerElemc = $("<i>").addClass("fa fa-times");
-
-                    }
-                    if (options.displayDuration > 0) {
-                        setTimeout((function () {
-                            leave();
-                        }), options.displayDuration);
-                    } else {
-                        innerElem.append("<em>Click to Dismiss</em>");
-                    }
-                    alertElem.on("click", function () {
-                        leave();
-                    });
-
-                    function leave() {
-                        alertElem.removeClass('open');
-                        alertElem.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-                            return alertElem.remove();
-                        });
-                    }
-                    return _container.prepend(alertElem);
-                };
-                Alert.defaults = {
-                    width: "",
-                    icon: "",
-                    displayDuration: 3000,
-                    pos: ""
-                };
-                Alert.info = info;
-                Alert.warning = warning;
-                Alert.error = error;
-                Alert.trash = trash;
-                Alert.success = success;
-                return _container = void 0;
-
-            })(Alert || (Alert = {}));
-
-            this.Alert = Alert;
-
-            $('#test').on('click', function () {
-                Alert.info('Message');
-            });
+// Only run this if jQuery is available and #test element exists
+if (typeof $ !== 'undefined') {
+    $(document).ready(function() {
+        $('#test').on('click', function () {
+            Alert.info('Message');
+        });
+    });
+}
         </script>
 
 
